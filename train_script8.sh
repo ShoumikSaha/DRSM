@@ -9,5 +9,5 @@ EPOCHS="$5"
 for (( i=0; i<8; i++ ))
 do
 	echo "$i"
-	python train_custom_malconv_by_ablation_from_csv.py --root_dir "$ROOT_DIR" --train_path "$TRAIN_CSV" --val_path "$VAL_CSV" --test_path "$TEST_CSV" --dir_path 'secml_malware/data/trained/smoothed_8' --ablation_idx $i --dataset_size 50 --ablations 8 --epochs 2 --batch_size 16 >> train_8_output.txt
+	python train_custom_malconv_by_ablation_from_csv.py --root_dir "$ROOT_DIR" --train_path "$TRAIN_CSV" --val_path "$VAL_CSV" --test_path "$TEST_CSV" --dir_path 'secml_malware/data/trained/smoothed_8' --ablation_idx $i --ablations 8 --epochs $EPOCHS --batch_size 16 >> output/train_8_output.txt
 done
