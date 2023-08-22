@@ -1,0 +1,18 @@
+secml_malware/data/trained/smoothed_1/smoothed_malconv_1_0.h5
+Loading the model from path
+0
+Train Accuracy (Standard):  0.9
+Train Accuracy (Certified):  0.22
+Validation Accuracy (Standard):  0.7894736842105263
+Validation Accuracy (Certified):  0.5263157894736842
+Test Accuracy (Standard):  0.94
+Test Accuracy (Certified):  0.02
+secml_malware/data/trained/smoothed_1/smoothed_malconv_1_0.h5
+Loading the model from path
+0
+Train Accuracy (Standard):  0.9
+Train Accuracy (Certified):  0.0
+Validation Accuracy (Standard):  0.7894736842105263
+Validation Accuracy (Certified):  0.0
+Test Accuracy (Standard):  0.94
+Test Accuracy (Certified):  0.0

@@ -1,0 +1,11 @@
+lief
+python-magic
+matplotlib
+numpy
+seaborn
+secml
+lightgbm
+deap
+git+https://github.com/elastic/ember.git
+torch
+torchvision
