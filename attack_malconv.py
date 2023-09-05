@@ -47,8 +47,11 @@ def get_samples_to_attack(net, csv_path, root_dir, no_samples=-1):
     if choice == 'None': print("Check your file path!")
 
     for i in range(len(df)):
-        if i == no_samples: break
+        if len(X) >= no_samples: break
         # print(df.iloc[i, 0], df.iloc[i, 1])
+        label = int(df.iloc[i, 1])
+        if label == 0:  continue
+
         file_name = str(df.iloc[i, 0])
 
         if choice == 'lucas':

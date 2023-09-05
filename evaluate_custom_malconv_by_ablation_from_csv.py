@@ -74,24 +74,24 @@ def main(root_dir, train_path, val_path, test_path, dir_path, dataset_size, tota
                                                 int(inp_len / total_ablations), perturb_size)
     train_acc = get_acc(votes, train_loader)
     print("Train Accuracy (Standard): ", train_acc)
-    cert_train_acc = get_acc(certified_votes, train_loader)
-    print("Train Accuracy (Certified): ", cert_train_acc)
+    #cert_train_acc = get_acc(certified_votes, train_loader)
+    #print("Train Accuracy (Certified): ", cert_train_acc)
 
     votes, certified_votes = get_majority_voting_without_padding(np.asarray(val_preds_all_models), len(val_preds_all_models[0]),
                                                 lengths_all_val,
                                                 int(inp_len / total_ablations), perturb_size)
     val_acc = get_acc(votes, valid_loader)
     print("Validation Accuracy (Standard): ", val_acc)
-    cert_val_acc = get_acc(certified_votes, valid_loader)
-    print("Validation Accuracy (Certified): ", cert_val_acc)
+    #cert_val_acc = get_acc(certified_votes, valid_loader)
+    #print("Validation Accuracy (Certified): ", cert_val_acc)
 
     votes, certified_votes = get_majority_voting_without_padding(np.asarray(test_preds_all_models), len(test_preds_all_models[0]),
                                                 lengths_all,
                                                 int(inp_len / total_ablations), perturb_size)
     test_acc = get_acc(votes, test_loader)
     print("Test Accuracy (Standard): ", test_acc)
-    cert_test_acc = get_acc(certified_votes, test_loader)
-    print("Test Accuracy (Certified): ", cert_test_acc)
+    #cert_test_acc = get_acc(certified_votes, test_loader)
+    #print("Test Accuracy (Certified): ", cert_test_acc)
 
 
 def get_predicts(net_model, data_generator):

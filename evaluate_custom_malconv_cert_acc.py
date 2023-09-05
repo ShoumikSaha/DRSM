@@ -24,14 +24,14 @@ from torch.utils.data import Dataset, DataLoader, random_split, default_collate
 inp_len = 2 ** 21
 
 
-def main(root_dir, train_path, val_path, test_path, dir_path, dataset_size, total_ablations, batch_size=16, perturb_size=20000):
+def main(root_dir, train_path, val_path, test_path, dir_path, dataset_size, total_ablations, batch_size=16, perturb_sizes=20000):
     """
     net = Custom_MalConv(max_input_size=int(inp_len / total_ablations), unfreeze=True)
     net = CClassifierEnd2EndMalware(net, batch_size=batch_size)
     net._n_features = int(inp_len / total_ablations)
     """
 
-    print("Perturbation Size: ", perturb_size)
+
 
     nets = []
     ablation_idxs = []
@@ -71,26 +71,29 @@ def main(root_dir, train_path, val_path, test_path, dir_path, dataset_size, tota
         val_preds, lengths_all_val = get_predicts(net, valid_loader)
         val_preds_all_models.append(val_preds)
 
-    votes, certified_votes = get_majority_voting_without_padding(np.asarray(train_preds_all_models), len(train_preds_all_models[0]),
-                                                lengths_all_train,
-                                                int(inp_len / total_ablations), perturb_size)
+    for perturb_size in perturb_sizes:
+        print("Perturbation Size: ", perturb_size)
 
-    cert_train_acc = get_acc(certified_votes, train_loader)
-    print("Train Accuracy (Certified): ", cert_train_acc)
+        votes, certified_votes = get_majority_voting_without_padding(np.asarray(train_preds_all_models), len(train_preds_all_models[0]),
+                                                    lengths_all_train,
+                                                    int(inp_len / total_ablations), perturb_size)
 
-    votes, certified_votes = get_majority_voting_without_padding(np.asarray(val_preds_all_models), len(val_preds_all_models[0]),
-                                                lengths_all_val,
-                                                int(inp_len / total_ablations), perturb_size)
+        cert_train_acc = get_acc(certified_votes, train_loader)
+        print("Train Accuracy (Certified): ", cert_train_acc)
 
-    cert_val_acc = get_acc(certified_votes, valid_loader)
-    print("Validation Accuracy (Certified): ", cert_val_acc)
+        votes, certified_votes = get_majority_voting_without_padding(np.asarray(val_preds_all_models), len(val_preds_all_models[0]),
+                                                    lengths_all_val,
+                                                    int(inp_len / total_ablations), perturb_size)
 
-    votes, certified_votes = get_majority_voting_without_padding(np.asarray(test_preds_all_models), len(test_preds_all_models[0]),
-                                                lengths_all,
-                                                int(inp_len / total_ablations), perturb_size)
+        cert_val_acc = get_acc(certified_votes, valid_loader)
+        print("Validation Accuracy (Certified): ", cert_val_acc)
 
-    cert_test_acc = get_acc(certified_votes, test_loader)
-    print("Test Accuracy (Certified): ", cert_test_acc)
+        votes, certified_votes = get_majority_voting_without_padding(np.asarray(test_preds_all_models), len(test_preds_all_models[0]),
+                                                    lengths_all,
+                                                    int(inp_len / total_ablations), perturb_size)
+
+        cert_test_acc = get_acc(certified_votes, test_loader)
+        print("Test Accuracy (Certified): ", cert_test_acc)
 
 
 def get_predicts(net_model, data_generator):
@@ -119,7 +122,8 @@ def get_acc(votes, data_generator):
     acc = accuracy_score(votes, labels)
     return acc
 
-
+def list_of_ints(arg):
+    return list(map(int, arg.split(',')))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Evaluate the custom model")
@@ -131,7 +135,8 @@ if __name__ == '__main__':
     parser.add_argument('--dataset_size', type=int, metavar='dataset_size', required=False, default=-2)
     parser.add_argument('--ablations', type=int, metavar='total_ablations', required=True)
     parser.add_argument('--batch_size', type=int, metavar='batch_size', required=True)
-    parser.add_argument('--perturb_size', type=int, metavar='length of perturbation', required=False, default=20000)
+    #parser.add_argument('--perturb_size', type=int, metavar='length of perturbation', required=False, default=20000)
+    parser.add_argument('--perturb_sizes', type=list_of_ints, metavar='length of perturbations', required=False, default=20000)
 
     args = parser.parse_args()
-    main(args.root_dir, args.train_path, args.val_path, args.test_path, args.dir_path, args.dataset_size, args.ablations, args.batch_size, args.perturb_size)
+    main(args.root_dir, args.train_path, args.val_path, args.test_path, args.dir_path, args.dataset_size, args.ablations, args.batch_size, args.perturb_sizes)
