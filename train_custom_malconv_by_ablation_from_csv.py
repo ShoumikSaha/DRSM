@@ -15,6 +15,7 @@ from secml_malware.smoothed_malconv import get_dataset, create_smoothed_malconv,
     pad_ablated_input, train_model, model_predict, get_majority_voting, get_majority_voting_without_padding, modify_dataset_for_smoothed_malconv_by_ablation
 
 from secml_malware.custom_malconv import Custom_MalConv
+from secml_malware.nonneg_malconv import NonNeg_MalConv, weightConstraint
 from secml_malware.models.my_dataloader_csv import MyDataSet
 from torch.utils.data import Dataset, DataLoader, random_split, default_collate
 
@@ -26,13 +27,21 @@ use_mps = torch.backends.mps.is_available()
 inp_len = 2**21
 
 
-def main(root_dir, train_path, val_path, test_path, dir_path, ablation_idx, dataset_size, total_ablations=4, epoch=2, batch_size=16):
-    net = Custom_MalConv(ablation_idx=ablation_idx, max_input_size=int(inp_len / total_ablations), unfreeze=True)
+def main(root_dir, train_path, val_path, test_path, dir_path, ablation_idx, dataset_size, total_ablations=4, epoch=2, batch_size=16, non_neg=False):
+    if(non_neg):
+        net = NonNeg_MalConv(ablation_idx=ablation_idx, max_input_size=int(inp_len / total_ablations), unfreeze=True)
+        constraints = weightConstraint()
+        print(net)
+        net._modules['linear2'].apply(constraints)
+    else:
+        net = Custom_MalConv(ablation_idx=ablation_idx, max_input_size=int(inp_len / total_ablations), unfreeze=True)
+    #constraints = weightConstraint()
+    #if(non_neg==True): net._modules['classifier'].apply(constraints)
     net = CClassifierEnd2EndMalware(net, batch_size=batch_size)
     net._n_features = int(inp_len / total_ablations)
     net._epochs = epoch
     net.batch_size = batch_size
-    net._optimizer_scheduler = torch.optim.lr_scheduler.StepLR(net._optimizer, step_size=30, gamma=0.1)
+    net._optimizer_scheduler = torch.optim.lr_scheduler.StepLR(net._optimizer, step_size=2, gamma=0.1)
 
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
@@ -168,10 +177,11 @@ if __name__ == "__main__":
     parser.add_argument('--ablations', type=int, metavar='total_ablations', required=True)
     parser.add_argument('--epochs', type=int, metavar='epoch', required=True)
     parser.add_argument('--batch_size', type=int, metavar='batch_size', required=False, default=16)
+    parser.add_argument('--non_neg', type=bool, metavar='non_neg', required=False, default=False)
 
     args = parser.parse_args()
     main(args.root_dir, args.train_path, args.val_path, args.test_path, args.dir_path, args.ablation_idx, args.dataset_size, args.ablations, args.epochs,
-         args.batch_size)
+         args.batch_size, args.non_neg)
 
 
 
