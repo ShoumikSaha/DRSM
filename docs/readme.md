@@ -20,6 +20,18 @@ To train the models, run `train_custom_malconv_by_ablation_from_csv.py`. Or, sim
 
 Here, the *number* in the script name indicates the *n* in our DRSM-n models. For example, running `train_script4.sh` script would train our DRSM-4.
 
+Below are the arguments for training - 
+
+`--root_dir`: path of root directory that contains the dataset
+
+`--train_path`: path of csv that contains the file paths from train-set
+
+`--val_path`: path of csv that contains the file paths from validation-set
+
+`--test_path`: path of csv that contains the file paths from test-set
+
+`--dir_path`: directory where the trained model will be saved
+
 ## Evaluation
 
 ## Dataset
