@@ -57,4 +57,7 @@ After running this, it will output the standard accuracy with other metrics like
 ### Certified Accuracy
 Run the `evaluate_custom_malconv_cert_acc.py` file, or the script `cert_acc_script.sh`. It takes a list with `--perturb_size` argument for which it will generate the results.
 
-## Dataset
+## PACE Dataset
+This dataset contains over 15.5K benign raw executables collected from different free websites. See our paper for a specific breakdown.
+
+In the `dataset' folder, there are `.csv` files with website names, for example, `sourceforge.csv`. These csv files contain website URLs to download the executables from along with their MD5 hash. We will continue updating this dataset and extend it. 
