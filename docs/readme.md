@@ -16,6 +16,10 @@ That's it! You're good to go! :smile:
 
 ## Training
 
+To train the models, run `train_custom_malconv_by_ablation_from_csv.py`. Or, simply run the provided scripts, such as `train_script1.sh`, `train_script4.sh`, etc. 
+
+Here, the *number* in the script name indicates the *n* in our DRSM-n models. For example, running `train_script4.sh` script would train our DRSM-4.
+
 ## Evaluation
 
 ## Dataset
