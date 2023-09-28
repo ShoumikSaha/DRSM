@@ -6,7 +6,13 @@ Please cite our paper if you use our model or data.
 
 
 ## Setup
+**Using Conda**
 
+Simply run the command - 
+
+`conda env create -n pytorch_env_smksaha --file environment.yml`
+
+That's it! You're good to go! :smile:
 
 ## Training
 
