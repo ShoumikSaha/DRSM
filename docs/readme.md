@@ -32,6 +32,18 @@ Below are the arguments for training -
 
 `--dir_path`: directory where the trained model will be saved
 
+`--ablation_idx`: the specific ablation of the model will be trained
+
+`--ablations`: total number of ablations a model can have
+
+`--dataset_size`: if you want to limit your train on specific number of samples. Otherwise, it will train on all files from 'train.csv'
+
+`--epochs`: number of epochs the model will be trained
+
+`--batch_size`: batch size to train on
+
+`--non_neg`: True if you want to put non-negative weight constraint on the model
+
 ## Evaluation
 
 ## Dataset
