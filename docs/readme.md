@@ -44,6 +44,9 @@ Below are the arguments for training -
 
 `--non_neg`: True if you want to put non-negative weight constraint on the model
 
+
+**We would recommend using our provided scripts to train the models. It's easier. You just need to provide root_directory, file_paths, and batch_size.** After running this, the models will be saved in the `secml_malware/data/trained` folder. 
+
 ## Evaluation
 
 ## Dataset
