@@ -48,9 +48,13 @@ Below are the arguments for training -
 **We would recommend using our provided scripts to train the models. It's easier. You just need to provide root_directory, file_paths, and batch_size in that case.** After running this, the models will be saved in the `secml_malware/data/trained` folder. 
 
 ## Evaluation
-### Standard Accuracy:
-For evaluation, run the `evaluate_custom_malconv_by_ablation_from_csv.py` file. It takes almost the same arguments as training. However, you can simply run the `evaluate_script.sh` with just a few arguments.
+### Standard Accuracy
+Run the `evaluate_custom_malconv_by_ablation_from_csv.py` file. It takes almost the same arguments as training. However, you can simply run the `evaluate_script.sh` with just a few arguments.
 
 After running this, it will output the standard accuracy with other metrics like false positive, true positive, confusion matrix etc.
+
+
+### Certified Accuracy
+Run the `evaluate_custom_malconv_cert_acc.py` file, or the script `cert_acc_script.sh`. It takes a list with `--perturb_size` argument for which it will generate the results.
 
 ## Dataset
