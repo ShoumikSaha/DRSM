@@ -45,8 +45,12 @@ Below are the arguments for training -
 `--non_neg`: True if you want to put non-negative weight constraint on the model
 
 
-**We would recommend using our provided scripts to train the models. It's easier. You just need to provide root_directory, file_paths, and batch_size.** After running this, the models will be saved in the `secml_malware/data/trained` folder. 
+**We would recommend using our provided scripts to train the models. It's easier. You just need to provide root_directory, file_paths, and batch_size in that case.** After running this, the models will be saved in the `secml_malware/data/trained` folder. 
 
 ## Evaluation
+### Standard Accuracy:
+For evaluation, run the `evaluate_custom_malconv_by_ablation_from_csv.py` file. It takes almost the same arguments as training. However, you can simply run the `evaluate_script.sh` with just a few arguments.
+
+After running this, it will output the standard accuracy with other metrics like false positive, true positive, confusion matrix etc.
 
 ## Dataset
