@@ -62,10 +62,10 @@ This dataset contains over 15.5K benign raw executables collected from different
 
 In the `dataset` folder, there are `.csv` files with website names, for example, `sourceforge.csv`. These csv files contain website URLs to download the executables from along with their MD5 hash. 
 
-| Version | Total Files |
-|--------- |------------- |
-| v1       | 15.5K |
-| [v2](/dataset)       | 18.5K |
+| Version | Total Files | Collection Time |
+|--------- |------------- | ------------|
+| v1       | 15.5K | August, 2022 |
+| [v2](/dataset)       | 18.5K | September, 2023 |
 
 We will be updating the dataset on a regular basis.
 
