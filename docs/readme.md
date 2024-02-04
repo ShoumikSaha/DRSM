@@ -2,8 +2,16 @@
 
 We redesigned the *de-randomized smoothing* scheme to make it applicable for byte-based inputs. We used MalConv as our base classifier and hence, we named our model **DRSM (De-Randomized Smoothed MalConv)**. We are also publishing our **PACE (Publicly Accessible Collection(s) of Executables)** dataset containing diverse benign raw executables.
 
-Please cite our paper if you use our model or data.
+Please cite our paper if you use our model or data. This paper will appear in ICLR 2024.
 
+```bibtex
+@article{saha2023drsm,
+  title={Drsm: De-randomized smoothing on malware classifier providing certified robustness},
+  author={Saha, S and Wang, W and Kaya, Y and Feizi, S and Dumitras, T},
+  journal={arXiv preprint arXiv:2303.13372},
+  year={2023}
+}
+```
 
 ## Setup
 **Using Conda**
@@ -68,4 +76,6 @@ In the `dataset` folder, there are `.csv` files with website names, for example,
 | [v2](/dataset)       | 18.5K | September, 2023 |
 
 We will be updating the dataset on a regular basis.
+
+
 
